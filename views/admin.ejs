@@ -16,12 +16,10 @@
             document.querySelector('#eyeColor').addEventListener('color-changed', fcEyesColor);
             document.querySelector('#faceTrack').addEventListener('change', fcFaceTrack);
         });
-
-
         function fcEyesColor() {
             let value = document.querySelector('#eyeColor').color;
-            console.log('eyeColor',value.substr(1)+'ff');
-            var payLoad = { origin: 'im-admin', rgba: value.substr(1)+'ff' }
+            console.log('eyeColor', value.substr(1) + 'ff');
+            var payLoad = { origin: 'im-admin', rgba: value.substr(1) + 'ff' }
             client.publish("im/command/eyes/color", JSON.stringify(payLoad));
         }
         function fcFaceTrack() {
@@ -35,7 +33,11 @@
 
 <body>
     <div id="container" style="width:400px;display: inline-block;">
-        <im-broker id="imBroker" status="help"></im-broker>
+        <% if (locals['im-broker']){%>
+        <im-broker id="imBroker" status="help" url="ws://<%= locals['im-broker'].host %>:<%= locals['im-broker'].txtRecord.wsport %>"></im-broker>
+        <% }else{%>
+            <b>NO Broker</b>
+        <%} %>
         <hr/>
         <im-command topic="helmet" payload="" label="helmet"></im-command>
         <im-command topic="helmet/open" payload="" label="open"></im-command>
@@ -45,10 +47,14 @@
         <paper-swatch-picker id="eyeColor"></paper-swatch-picker><br/>
         <im-command topic="head" payload="" label="head"></im-command>
         <paper-slider id="faceTrack" min="0" value="50" max="100" pin step="5"></paper-slider><br/>
-        <im-command topic="energy/off"   payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  " label="ledring off"></im-command>
-        <im-command topic="energy/on"    payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  " label="ledring on"></im-command>
-        <im-command topic="energy/beat"  payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  " label="ledring beat"></im-command>
-        <im-command topic="energy/chase" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  " label="ledring chase"></im-command>
+        <im-command topic="energy/off" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
+            label="ledring off"></im-command>
+        <im-command topic="energy/on" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
+            label="ledring on"></im-command>
+        <im-command topic="energy/beat" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
+            label="ledring beat"></im-command>
+        <im-command topic="energy/chase" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
+            label="ledring chase"></im-command>
         <br/>
         <im-command topic="rightarm/move" payload="" label="rightarm"></im-command>
         <im-command topic="leftarm/move" payload="" label="leftarm"></im-command><br/>
@@ -64,17 +70,29 @@
         <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;800080FF&quot;" label="purple"></im-command>
         <hr/>
         <im-command topic="im/reset" payload="" label="reset"></im-command>
+        <hr/> Last Command:
+        <im-subscribe filter="im/command/#" height="" width="400px"></im-subscribe>
+        Status:
+        <im-subscribe filter="im/event/rpiheart/status" height="100px" width="400px"></im-subscribe>
         <hr/>
-        Last Command: <im-subscribe filter="im/command/#" height="" width="400px"></im-subscribe>
-        Status: <im-subscribe filter="im/event/rpiheart/status" height="100px" width="400px"></im-subscribe>
+        <% if (locals['im-web']){%>
+        <a href="http://<%= locals['im-web'].host %>:<%= locals['im-web'].port %>" target="command">Local web command</a>&nbsp;&nbsp;
+        <% }else{%>
+            <b>NO Local web command</b> &nbsp;&nbsp;
+        <%} %>
+        <% if (locals['im-pm2']){%>
+        <a href="http://<%= locals['im-pm2'].host %>:<%= locals['im-pm2'].port %>" target="supervisor">Pm2 GUI</a>&nbsp;&nbsp;
+        <% }else{%>
+            <b>NO Pm2 GUI</b> &nbsp;&nbsp;
+        <%} %>
+        <a href="https://www.dataplicity.com" target="dataplicity">Dataplicity</a>
         <hr/>
-        <a href="../" target="command">Local web command</a>&nbsp;&nbsp;
-        <a href="../simulator" target="simulator">Local web simulator</a>&nbsp;&nbsp;
-        <a href="javascript:void(0)" onclick="this.href='http://' + window.location.hostname + ':8088';" target="supervisor">Pm2 GUI</a>&nbsp;&nbsp;
-        <a href="https://www.dataplicity.com" target="dataplicity">Dataplicity</a><hr/>
     </div>
-    <iframe src="../simulator" width="400px" height="450px" style="display: inline-block;vertical-align:top"></iframe>
-    <iframe src="../" width="400px" height="600px" style="display: inline-block;vertical-align:top"></iframe>
+    <iframe src="/simulator" width="400px" height="500px" style="display: inline-block;vertical-align:top"></iframe>
+    <% if (locals['im-web']){%>
+    <iframe src="http://<%= locals['im-web'].host %>:<%= locals['im-web'].port %>" width="400px" height="600px" style="display: inline-block;vertical-align:top"></iframe>
+    <% } %>
+    <iframe width="400px" height="430" src="https://console.dialogflow.com/api-client/demo/embedded/27e568e7-cb65-43e1-8302-11f6a51157ad" style="display: inline-block;vertical-align:top"></iframe>
 </body>
 
 </html>

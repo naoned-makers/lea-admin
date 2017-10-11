@@ -30,6 +30,10 @@
                         value: "help",
                         notify: true
                     },
+                    url: {
+                        type: String,
+                        notify: true
+                    },
                     class: {
                         type: String,
                         notify: true
@@ -45,7 +49,7 @@
                 /**
                     PARTIE MQTT sur WEBSOCKET
                 */
-                var client = mqtt.connect('ws://' + window.location.hostname + ':3000', { clientId: 'webadmin_' + Math.random().toString(16).substr(2, 8) });
+                var client = mqtt.connect(this.url, { clientId: 'webadmin_' + Math.random().toString(16).substr(2, 8) });
                 window.client = client;
                 var curBroker = this;
                 //Emitted on successful (re)connection 

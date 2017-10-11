@@ -4,18 +4,20 @@
 <head>
     <meta charset="utf-8" />
     <title>IM-Simulator</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <script src="mqtt.min.js"></script>
     <script type="text/javascript">
-        let client = mqtt.connect('ws://' + window.location.hostname + ':3000', { clientId: 'hatsimulator_' + Math.random().toString(16).substr(2, 8) });
-
-        //Emitted on successful (re)connection 
-        client.on('connect', function () {
-            console.log('connect');
-            client.subscribe('im/event/rpiheart/pwmhat/+');
-            document.getElementById("mqtton").style.color = "green";
-        })
+        <% if (locals['im-broker']) {%>
+            let client = mqtt.connect('ws://<%= locals['im-broker'].host %>:<%= locals['im-broker'].txtRecord.wsport %>', { clientId: 'hatsimulator_' + Math.random().toString(16).substr(2, 8) });
+        <% }else {%>
+            let client = { on: function () { } };
+        <%} %>
+            //Emitted on successful (re)connection 
+            client.on('connect', function () {
+                console.log('connect');
+                client.subscribe('im/event/rpiheart/pwmhat/+');
+                document.getElementById("mqtton").style.color = "green";
+            })
 
         //Emitted when the client goes offline.
         client.on('offline', function () {
@@ -61,11 +63,15 @@
         })
     </script>
     <script type="text/javascript">
-        let clientpixel = mqtt.connect('ws://' + window.location.hostname + ':3000', { clientId: 'pixelsimulator_' + Math.random().toString(16).substr(2, 8) });
-        //Emitted on successful (re)connection 
-        clientpixel.on('connect', function () {
-            clientpixel.subscribe('im/event/rpiheart/neopixel/+');
-        })
+        <% if (locals['im-broker']) {%>
+                let clientpixel = mqtt.connect("ws://<%= locals['im-broker'].host%>:<%= locals['im-broker'].txtRecord.wsport%>", { clientId: 'pixelsimulator_' + Math.random().toString(16).substr(2, 8) });
+        <% }else {%>
+            let clientpixel = { on: function () { } };
+        <%} %>
+            //Emitted on successful (re)connection 
+            clientpixel.on('connect', function () {
+                clientpixel.subscribe('im/event/rpiheart/neopixel/+');
+            })
         //A new command as arrived
         clientpixel.on('message', function (topic, strPlayload) {
             let animation = topic.split("/")[4];
@@ -95,6 +101,12 @@
         }
     </script>
     <style>
+        body {
+            background-color: #202020;
+            /*width: 100%;
+	        height: 100%;*/
+            overflow: hidden;
+        }
         input[type=range][orient=vertical] {
             writing-mode: bt-lr;
             /* IE */

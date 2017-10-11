@@ -20,13 +20,13 @@ module.exports = {
       script: '../im-broker/service/web.js',
       merge_logs: true,
       log_date_format: 'YYYY-MM-DD HH:mm',
-      watch: ["service/web.js"],
+      watch: ["../im-broker/service/web.js"],
       ignore_watch: ["node_modules"],
       watch_options: {
         "followSymlinks": true
       },
-      env: {},
-      env_production: {}
+      env: {AVAHI_COMPAT_NOWARN:'1'},
+      env_production: {AVAHI_COMPAT_NOWARN:'1'}
     },
     // MQTT BROKER
     {
@@ -34,12 +34,12 @@ module.exports = {
       script: '../im-broker/service/broker.js',
       merge_logs: true,
       log_date_format: 'YYYY-MM-DD HH:mm',
-      watch: ["service/broker.js"],
+      watch: ["../im-broker/service/broker.js"],
       watch_options: {
         "followSymlinks": true
       },
-      env: {},
-      env_production: {}
+      env: {AVAHI_COMPAT_NOWARN:'1'},
+      env_production: {AVAHI_COMPAT_NOWARN:'1'}
     },
 
     // DDD agregate: im brain
@@ -48,7 +48,7 @@ module.exports = {
       script: '../im-broker/service/brain.js',
       merge_logs: true,
       log_date_format: 'YYYY-MM-DD HH:mm',
-      watch: ["service/brains.js", "domain/*"],
+      watch: ["../im-broker/service/brains.js", "domain/*"],
       watch_options: {
         "followSymlinks": true
       },
@@ -62,7 +62,7 @@ module.exports = {
       script: '../im-broker/service/cloud.js',
       merge_logs: true,
       log_date_format: 'YYYY-MM-DD HH:mm',
-      watch: ["service/cloud.js"],
+      watch: ["../im-broker/service/cloud.js"],
       watch_options: {
         "followSymlinks": true
       },
@@ -103,7 +103,7 @@ module.exports = {
       restart_delay: 1000,
       merge_logs: true,
       log_date_format: 'YYYY-MM-DD HH:mm',
-      watch: ["python/neopixel.py"],
+      watch: ["../im-broker/python/neopixel.py"],
       watch_options: {
         "followSymlinks": true
       },

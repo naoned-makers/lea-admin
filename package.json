@@ -18,12 +18,13 @@
   },
   "homepage": "https://github.com/naoned-makers/im-admin#readme",
   "dependencies": {
-    "mdns": "^2.3.3",
-    "mqtt": "^2.13.0",
-    "pm2": "^2.7.1",
-    "pm2-gui": "^0.1.4",
+    "ejs": "^2.5.7",
     "express": "^4.15.3",
     "ip": "^1.1.5",
-    "path": "^0.12.7"
+    "mdns": "^2.3.3",
+    "mqtt": "^2.13.0",
+    "path": "^0.12.7",
+    "pm2": "^2.7.1",
+    "pm2-gui": "^0.1.4"
   }
 }
