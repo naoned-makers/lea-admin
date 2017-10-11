@@ -9,6 +9,8 @@ let path = require('path');
 let pm2GUI = require('pm2-gui');
 let pm2 = require('pm2');
 let mdns = require('mdns');
+const { spawn } = require('child_process');
+
 
 const ADMIN_HTTP_PORT = 8081;
 
@@ -43,6 +45,31 @@ app.get('/services', function (req, res, next) {
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(imServices));
 });
+app.get('/halt', function (req, res, next) {
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Halt asked');
+  const halt = spawn('halt');
+  halt.stdout.on('data', (data) => {
+    console.log(`stdout: ${data}`);
+  });
+  halt.stderr.on('data', (data) => {
+    console.log(`stderr: ${data}`);
+  });
+});
+app.get('/init3', function (req, res, next) {
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('telinit 3 asked');
+  const telinit = spawn('telinit 3');//'ls', ['-lh', '/usr']
+  telinit.stdout.on('data', (data) => {
+    console.log(`stdout: ${data}`);
+  });
+  telinit.stderr.on('data', (data) => {
+    console.log(`stderr: ${data}`);
+  });
+});
+
+
+
 server.listen(ADMIN_HTTP_PORT);
 console.log('\x1b[35m%s\x1b[0m', "admin web server is up on http://" + ip.address() + ":" + ADMIN_HTTP_PORT);
 let webAdminServiceType = mdns.makeServiceType({ name: 'im-admin', protocol: 'tcp' });
@@ -54,6 +81,39 @@ discoverService('im-admin');
 discoverService('im-broker');
 discoverService('im-pm2');
 
+
+//##############################################################################
+//#########################   CPU & MEME     ###################################
+//##############################################################################
+/*
+
+var stat = require('./stat')
+setInterval(runTimer, self.options.process_refresh)
+function runTimer () {
+  pidusage.stat(pid, function (err, stat) {
+    if (err) {
+      delete self._cache.usages[pidStr]
+      return self._emitError(err, {
+        id: pid,
+        namespace: conf.NSP.PROCESS
+      })
+    }
+    stat.memory = stat.memory * 100 / totalmem
+
+    var data = {
+      pid: pid,
+      time: Date.now(),
+      usage: stat
+    }
+    mqtt.publish
+  })
+*/
+
+
+
+//##############################################################################
+//#########################   PM2 GUI        ###################################
+//##############################################################################
 console.log("pm2-gui starting");
 let pm2GuiServiceType = mdns.makeServiceType({ name: 'im-pm2', protocol: 'tcp' });
 let adPm2Gui = mdns.createAdvertisement(pm2GuiServiceType, 8088);
@@ -62,6 +122,10 @@ pm2GUI.startWebServer('./pm2-gui.ini');//port 8088
 //pm2GUI.startAgent('./pm2-gui.ini');
 //pm2GUI.dashboard('./pm2-gui.ini');
 console.log("pm2-gui started");
+//##############################################################################
+
+
+
 
 function discoverService(serviceName) {
   let sequence = [
