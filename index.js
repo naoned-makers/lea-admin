@@ -39,7 +39,7 @@ app.get('/', function (req, res, next) {
 app.get('/simulator', function (req, res, next) {
   res.render('simulator',imServices);
 });
-app.get('/im-services', function (req, res, next) {
+app.get('/services', function (req, res, next) {
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(imServices));
 });
