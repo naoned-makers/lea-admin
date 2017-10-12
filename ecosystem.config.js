@@ -120,7 +120,7 @@ module.exports = {
     ,
     {
       name: 'camera',
-      //interpreter:'/usr/bin/python'
+      interpreter:'python3',
       interpreter_args: '-u',
       script: '../im-camera/src/main.py',
       args:'-d',
