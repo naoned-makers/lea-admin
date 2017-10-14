@@ -2,14 +2,7 @@
 
 <dom-module id="im-subscribe">
 
-  <template>
-    <style>
-
-    </style>
-    <div style$="overflow-y:auto;height:[[height]];width:100%;background-color: #DDDDDD">
-      <b>[[topic]]</b> [[payload]]
-    </div>
-  </template>
+  <template></template>
 
   <script>
     // Define the class for a new element called im-command
@@ -21,6 +14,7 @@
         this._messageListener = this._handleMessage.bind(this);
         //this.textContent = "I'm a custom-element.";
       }
+
       // configure owner property
       static get properties() {
         return {
@@ -28,16 +22,20 @@
             type: String,
             reflectToAttribute: true,
           },
-          height: {
+          payload: {
+            type: Object,
+            reflectToAttribute: true,
+            notify: true
+          },
+          strpayload: {
             type: String,
             reflectToAttribute: true,
-            value: "",
-          },
-          payload: {
-            type: Object
+            notify: true
           },
           topic: {
-            type: String
+            type: String,
+            reflectToAttribute: true,
+            notify: true
           }
         };
       }
@@ -53,14 +51,14 @@
         e.detail.subscribe(this.filter);
         e.detail.on('message', this._messageListener);
       }
-      _handleMessage(mTopic, mStrPlayload) {
-        let filterRegExp =  this.filter.replace(new RegExp('\/', 'g'), '\\/').replace(new RegExp('#', 'g'), '(\\w+)');//+"/";
+      _handleMessage(mTopic, mStrPayload) {
+        let filterRegExp = this.filter.replace(new RegExp('\/', 'g'), '\\/').replace(new RegExp('#', 'g'), '(\\w+)');//+"/";
         //console.log(topicFilter, mTopic)
         let found = mTopic.match(filterRegExp);
         if (found) {
-          console.log(mTopic, JSON.parse(mStrPlayload));
-          this.topic=mTopic;
-          this.payload = mStrPlayload;
+          this.topic = mTopic;
+          this.payload = JSON.parse(mStrPayload);
+          this.strpayload = JSON.stringify(this.payload);
         }
       }
     }

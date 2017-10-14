@@ -34,66 +34,86 @@
 <body>
     <div id="container" style="width:400px;display: inline-block;">
         <% if (locals['im-broker']){%>
-        <im-broker id="imBroker" status="help" url="ws://<%= locals['im-broker'].host %>:<%= locals['im-broker'].txtRecord.wsport %>"></im-broker>
-        <% }else{%>
-            <b>NO Broker</b>
-        <%} %>
-        <hr/>
-        <im-command topic="helmet" payload="" label="helmet"></im-command>
-        <im-command topic="helmet/open" payload="" label="open"></im-command>
-        <im-command topic="helmet/close" payload="" label="close"></im-command><br/>
-        <im-command topic="eyes/on" payload="" label="eyesOn"></im-command>
-        <im-command topic="eyes/off" payload="" label="eyseOff"></im-command>
-        <paper-swatch-picker id="eyeColor"></paper-swatch-picker><br/>
-        <im-command topic="head" payload="" label="head"></im-command>
-        <paper-slider id="faceTrack" min="0" value="50" max="100" pin step="5"></paper-slider><br/>
-        <im-command topic="energy/off" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
-            label="ledring off"></im-command>
-        <im-command topic="energy/on" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
-            label="ledring on"></im-command>
-        <im-command topic="energy/beat" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
-            label="ledring beat"></im-command>
-        <im-command topic="energy/chase" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
-            label="ledring chase"></im-command>
-        <br/>
-        <im-command topic="rightarm/move" payload="" label="rightarm"></im-command>
-        <im-command topic="leftarm/move" payload="" label="leftarm"></im-command><br/>
-        <im-command topic="righthand/move" payload="" label="righthand"></im-command>
-        <im-command topic="lefthand/move" payload="" label="Healefthand"></im-command>
-        <hr/>
-        <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;0000FFFF&quot;" label="blue"></im-command>
-        <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;FF0000FF&quot;" label="red"></im-command>
-        <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;00FF00FF&quot;" label="green"></im-command>
-        <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;FFFF00FF&quot;" label="yellow"></im-command>
-        <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;FFA500FF&quot;" label="orange"></im-command>
-        <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;FFC0CBFF&quot;" label="pink"></im-command>
-        <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;800080FF&quot;" label="purple"></im-command>
-        <hr/>
-        <im-command topic="im/reset" payload="" label="reset"></im-command>
-        <hr/> Last Command:
-        <im-subscribe filter="im/command/#" height="" width="400px"></im-subscribe>
-        Status:
-        <im-subscribe filter="im/event/rpiheart/status" height="100px" width="400px"></im-subscribe>
-        <hr/>
-        <% if (locals['im-web']){%>
-        <a href="http://<%= locals['im-web'].host %>:<%= locals['im-web'].port %>" target="command">Local web command</a>&nbsp;&nbsp;
-        <% }else{%>
-            <b>NO Local web command</b> &nbsp;&nbsp;
-        <%} %>
-        <% if (locals['im-pm2']){%>
-        <a href="http://<%= locals['im-pm2'].host %>:<%= locals['im-pm2'].port %>" target="supervisor">Pm2 GUI</a>&nbsp;&nbsp;
-        <% }else{%>
-            <b>NO Pm2 GUI</b> &nbsp;&nbsp;
-        <%} %>
-        <a href="https://www.dataplicity.com" target="dataplicity">Dataplicity</a>
-        <a href="/halt" target="top">Halt Rpi</a>
-        <hr/>
+            <im-broker id="imBroker" status="help" url="ws://<%= locals['im-broker'].host %>:<%= locals['im-broker'].txtRecord.wsport %>"></im-broker>
+            <% }else{%>
+                <b>NO Broker</b>
+                <%} %>
+                    <hr/>
+                    <im-command topic="helmet" payload="" label="helmet"></im-command>
+                    <im-command topic="helmet/open" payload="" label="open"></im-command>
+                    <im-command topic="helmet/close" payload="" label="close"></im-command>
+                    <br/>
+                    <im-command topic="eyes/on" payload="" label="eyesOn"></im-command>
+                    <im-command topic="eyes/off" payload="" label="eyseOff"></im-command>
+                    <paper-swatch-picker id="eyeColor"></paper-swatch-picker>
+                    <br/>
+                    <im-command topic="head" payload="" label="head"></im-command>
+                    <paper-slider id="faceTrack" min="0" value="50" max="100" pin step="5"></paper-slider>
+                    <br/>
+                    <im-command topic="energy/off" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
+                        label="ledring off"></im-command>
+                    <im-command topic="energy/on" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
+                        label="ledring on"></im-command>
+                    <im-command topic="energy/beat" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
+                        label="ledring beat"></im-command>
+                    <im-command topic="energy/chase" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
+                        label="ledring chase"></im-command>
+                    <br/>
+                    <im-command topic="rightarm/move" payload="" label="rightarm"></im-command>
+                    <im-command topic="leftarm/move" payload="" label="leftarm"></im-command>
+                    <br/>
+                    <im-command topic="righthand/move" payload="" label="righthand"></im-command>
+                    <im-command topic="lefthand/move" payload="" label="Healefthand"></im-command>
+                    <hr/>
+                    <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;0000FFFF&quot;" label="blue"></im-command>
+                    <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;FF0000FF&quot;" label="red"></im-command>
+                    <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;00FF00FF&quot;" label="green"></im-command>
+                    <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;FFFF00FF&quot;" label="yellow"></im-command>
+                    <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;FFA500FF&quot;" label="orange"></im-command>
+                    <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;FFC0CBFF&quot;" label="pink"></im-command>
+                    <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;800080FF&quot;" label="purple"></im-command>
+                    <hr/>
+                    <im-command topic="im/reset" payload="" label="reset"></im-command>
+                    <hr/>
+                    <b>Command: </b>
+                    <dom-bind>
+                        <template>
+                            <im-subscribe filter="im/command/#" topic="{{commandTopic}}" strpayload="{{commandPayload}}"></im-subscribe>
+                            <b>[[commandTopic]]</b>
+                            <div style="background-color: #DDDDDD;word-break: break-all;">[[commandPayload]]</div>
+                        </template>
+                    </dom-bind>
+                    <hr/>
+                    <b>Clients: </b>
+                    <dom-bind>
+                        <template>
+                            <im-subscribe filter="im/event/rpiheart/status" topic="{{clientTopic}}" payload="{{clientPayload}}"></im-subscribe>
+                            <template is="dom-repeat" items="[[clientPayload.brokerClients]]" as="client">
+                                <span style="margin-right:10px">[[client]]</span>
+                            </template>
+                        </template>
+                    </dom-bind>
+                    <hr/>
+                    <% if (locals['im-web']){%>
+                        <a href="http://<%= locals['im-web'].host %>:<%= locals['im-web'].port %>" target="command">Local web command</a>&nbsp;&nbsp;
+                        <% }else{%>
+                            <b>NO Local web command</b> &nbsp;&nbsp;
+                            <%} %>
+                                <% if (locals['im-pm2']){%>
+                                    <a href="http://<%= locals['im-pm2'].host %>:<%= locals['im-pm2'].port %>" target="supervisor">Pm2 GUI</a>&nbsp;&nbsp;
+                                    <% }else{%>
+                                        <b>NO Pm2 GUI</b> &nbsp;&nbsp;
+                                        <%} %>
+                                            <a href="https://www.dataplicity.com" target="dataplicity">Dataplicity</a>
+                                            <a href="/halt" target="top">Halt Rpi</a>
+                                            <hr/>
     </div>
     <iframe src="/simulator" width="400px" height="500px" style="display: inline-block;vertical-align:top"></iframe>
     <% if (locals['im-web']){%>
-    <iframe src="http://<%= locals['im-web'].host %>:<%= locals['im-web'].port %>" width="400px" height="600px" style="display: inline-block;vertical-align:top"></iframe>
-    <% } %>
-    <iframe width="400px" height="430" src="https://console.dialogflow.com/api-client/demo/embedded/27e568e7-cb65-43e1-8302-11f6a51157ad" style="display: inline-block;vertical-align:top"></iframe>
+        <iframe src="http://<%= locals['im-web'].host %>:<%= locals['im-web'].port %>" width="400px" height="600px" style="display: inline-block;vertical-align:top"></iframe>
+        <% } %>
+            <iframe width="400px" height="430" src="https://console.dialogflow.com/api-client/demo/embedded/27e568e7-cb65-43e1-8302-11f6a51157ad"
+                style="display: inline-block;vertical-align:top"></iframe>
 </body>
 
 </html>

@@ -48,7 +48,7 @@ module.exports = {
       script: '../im-broker/service/brain.js',
       merge_logs: true,
       log_date_format: 'YYYY-MM-DD HH:mm',
-      watch: ["../im-broker/service/brains.js", "domain/*"],
+      watch: ["../im-broker/service/brains.js", "../im-broker/domain/*"],
       watch_options: {
         "followSymlinks": true
       },
@@ -116,13 +116,13 @@ module.exports = {
       env_production: {
         IM_NEOPIXEL_MOCK: 'False'
       }
-    }
-    ,
+    },   
     {
       name: 'camera',
       interpreter:'python3',
       interpreter_args: '-u',
-      script: '../im-camera/src/main.py',
+      script: './src/main.py',
+      cwd: '/home/pi/dev/im-camera/',
       args:'-d',
       restart_delay: 1000,
       merge_logs: true,
