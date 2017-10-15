@@ -94,6 +94,22 @@
                         </template>
                     </dom-bind>
                     <hr/>
+                    <b>Usage: </b>
+                    <dom-bind id="rpiUsage">
+                        <template>
+                            <im-subscribe filter="im/event/rpiheart/usage" topic="{{usageTopic}}" payload="{{usagePayload}}"></im-subscribe>
+                                Mem:<span style="margin-right:10px">[[usagePayload.memory.percentage]] %</span>
+                                Cpu:<span style="margin-right:10px">[[usagePayload.cpuUsage]] %</span>
+                                Disk:<span style="margin-right:10px">[[toGo(usagePayload.disk.free)]]/[[toGo(usagePayload.disk.total)]] Go</span>
+                        </template>
+                        <script>
+                            var rpiUsage = document.querySelector('#rpiUsage');
+                            // set data property on dom-bind
+                            rpiUsage.toMo = function (octet){return Math.round(octet/(1024*1024))};
+                            rpiUsage.toGo = function (octet){return Math.round(octet/(1024*1024*1024))};
+                          </script>
+                    </dom-bind>
+                    <hr/>
                     <% if (locals['im-web']){%>
                         <a href="http://<%= locals['im-web'].host %>:<%= locals['im-web'].port %>" target="command">Local web command</a>&nbsp;&nbsp;
                         <% }else{%>
