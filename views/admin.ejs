@@ -13,7 +13,7 @@
     <link rel="import" href="im-subscribe.html">
     <script>
         window.addEventListener('WebComponentsReady', function () {
-            document.querySelector('#eyeColor').addEventListener('color-changed', fcEyesColor);
+            //document.querySelector('#eyeColor').addEventListener('color-changed', fcEyesColor);
             document.querySelector('#faceTrack').addEventListener('change', fcFaceTrack);
         });
         function fcEyesColor() {
@@ -42,14 +42,17 @@
                     <im-command topic="helmet" payload="" label="helmet"></im-command>
                     <im-command topic="helmet/open" payload="" label="open"></im-command>
                     <im-command topic="helmet/close" payload="" label="close"></im-command>
-                    <br/>
+                    <im-command topic="helmet/next" payload="" label="&#x021D2;" style="margin-left:0px;padding-left:0px"></im-command>
+                    <!--<br/>
                     <im-command topic="eyes/on" payload="" label="eyesOn"></im-command>
                     <im-command topic="eyes/off" payload="" label="eyseOff"></im-command>
                     <paper-swatch-picker id="eyeColor"></paper-swatch-picker>
-                    <br/>
+                    --><br/>
                     <im-command topic="head" payload="" label="head"></im-command>
+                    <im-command topic="head/next" payload="" label="&#x021D2;"></im-command>
                     <paper-slider id="faceTrack" min="0" value="50" max="100" pin step="5"></paper-slider>
                     <br/>
+                    <!--
                     <im-command topic="energy/off" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
                         label="ledring off"></im-command>
                     <im-command topic="energy/on" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
@@ -58,13 +61,13 @@
                         label="ledring beat"></im-command>
                     <im-command topic="energy/chase" payload=",&quot;speed&quot;:&quot;20&quot;,  &quot;repeat&quot;:&quot;20&quot;, &quot;rgb&quot;:&quot;2222FF&quot;  "
                         label="ledring chase"></im-command>
+                    <br/>-->
+                    <im-command topic="rightarm/move" payload="" label="r-arm"></im-command><im-command topic="rightarm/next" payload="" label="&#x021D2;"></im-command>
+                    <im-command topic="leftarm/move" payload="" label="l-arm"></im-command><im-command topic="leftarm/next" payload="" label="&#x021D2;"></im-command>
                     <br/>
-                    <im-command topic="rightarm/move" payload="" label="rightarm"></im-command>
-                    <im-command topic="leftarm/move" payload="" label="leftarm"></im-command>
-                    <br/>
-                    <im-command topic="righthand/move" payload="" label="righthand"></im-command>
-                    <im-command topic="lefthand/move" payload="" label="Healefthand"></im-command>
-                    <hr/>
+                    <im-command topic="righthand/move" payload="" label="r-hand"></im-command><im-command topic="righthand/next" payload="" label="&#x021D2;"></im-command>
+                    <im-command topic="lefthand/move" payload="" label="l-hand"></im-command><im-command topic="lefthand/next" payload="" label="&#x021D2;"></im-command>
+                    <!--<hr/>
                     <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;0000FFFF&quot;" label="blue"></im-command>
                     <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;FF0000FF&quot;" label="red"></im-command>
                     <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;00FF00FF&quot;" label="green"></im-command>
@@ -72,7 +75,7 @@
                     <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;FFA500FF&quot;" label="orange"></im-command>
                     <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;FFC0CBFF&quot;" label="pink"></im-command>
                     <im-command topic="im/color" payload=",&quot;rgba&quot;:&quot;800080FF&quot;" label="purple"></im-command>
-                    <hr/>
+                    <hr/>-->
                     <im-command topic="im/reset" payload="" label="reset"></im-command>
                     <hr/>
                     <b>Command: </b>
