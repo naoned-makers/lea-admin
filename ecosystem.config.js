@@ -134,7 +134,7 @@ module.exports = {
       },
       env_production: {
         IM_CAMERA_MOCK: 'False'
-      }
+      },
     }
   ]
 };
