@@ -27,6 +27,12 @@ pm2.connect(function (err) {
 */
 });
 
+process.on('SIGINT', function() {
+  pm2.disconnect();
+  console.log('stop')
+});
+
+
 var imServices = {};
 
 //#########################
@@ -55,6 +61,11 @@ app.get('/halt', function (req, res, next) {
   halt.stderr.on('data', (data) => {
     console.log(`stderr: ${data}`);
   });
+});
+app.get('/restartcamera', function (req, res, next) {
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Camera Restart');
+  pm2.restart('camera', (err,process)=>{console.error(err,process)})
 });
 app.get('/init3', function (req, res, next) {
   res.setHeader('Content-Type', 'text/plain');
