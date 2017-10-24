@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <title>im-admin</title>
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
     <script src="https://polygit.org/components/webcomponentsjs/webcomponents-loader.js"></script>
     <link rel="import" href="https://polygit.org/components/paper-swatch-picker/paper-swatch-picker.html">
@@ -33,8 +34,8 @@
 
 <body>
     <div id="container" style="width:400px;display: inline-block;">
-        <% if (locals['im-broker']){%>
-            <im-broker id="imBroker" status="help" url="ws://<%= locals['im-broker'].host %>:<%= locals['im-broker'].txtRecord.wsport %>"></im-broker>
+        <% if (locals['broker']){%>
+            <im-broker id="imBroker" status="help" url="ws://<%= locals['broker'].address %>:<%= locals['broker'].txtRecord.wsport %>"></im-broker>
             <% }else{%>
                 <b>NO Broker</b>
                 <%} %>
@@ -113,13 +114,13 @@
                           </script>
                     </dom-bind>
                     <hr/>
-                    <% if (locals['im-web']){%>
-                        <a href="http://<%= locals['im-web'].host %>:<%= locals['im-web'].port %>" target="command">Local web command</a>&nbsp;&nbsp;
+                    <% if (locals['web']){%>
+                        <a href="http://<%= locals['web'].address %>:<%= locals['web'].port %>" target="command">Local web command</a>&nbsp;&nbsp;
                         <% }else{%>
                             <b>NO Local web command</b> &nbsp;&nbsp;
                             <%} %>
-                                <% if (locals['im-pm2']){%>
-                                    <a href="http://<%= locals['im-pm2'].host %>:<%= locals['im-pm2'].port %>" target="supervisor">Pm2 GUI</a>&nbsp;&nbsp;
+                                <% if (locals['pm2']){%>
+                                    <a href="http://<%= locals['pm2'].address %>:<%= locals['pm2'].port %>" target="supervisor">Pm2 GUI</a>&nbsp;&nbsp;
                                     <% }else{%>
                                         <b>NO Pm2 GUI</b> &nbsp;&nbsp;
                                         <%} %>
@@ -130,8 +131,8 @@
                                             <hr/>
     </div>
     <iframe src="/simulator" width="400px" height="500px" style="display: inline-block;vertical-align:top"></iframe>
-    <% if (locals['im-web']){%>
-        <iframe src="http://<%= locals['im-web'].host %>:<%= locals['im-web'].port %>" width="400px" height="600px" style="display: inline-block;vertical-align:top"></iframe>
+    <% if (locals['web']){%>
+        <iframe src="http://<%= locals['web'].address %>:<%= locals['web'].port %>" width="400px" height="600px" style="display: inline-block;vertical-align:top"></iframe>
         <% } %>
             <iframe width="400px" height="430" src="https://console.dialogflow.com/api-client/demo/embedded/27e568e7-cb65-43e1-8302-11f6a51157ad"
                 style="display: inline-block;vertical-align:top"></iframe>
