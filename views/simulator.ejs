@@ -7,8 +7,8 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <script src="mqtt.min.js"></script>
     <script type="text/javascript">
-        <% if (locals['broker']) {%>
-            let client = mqtt.connect('ws://<%= locals['broker'].address %>:<%= locals['broker'].txtRecord.wsport %>', { clientId: 'hatsimulator_' + Math.random().toString(16).substr(2, 8) });
+        <% if (locals['imbroker']) {%>
+            let client = mqtt.connect('ws://<%= locals['imbroker'].address %>:<%= locals['imbroker'].txtRecord.wsport %>', { clientId: 'hatsimulator_' + Math.random().toString(16).substr(2, 8) });
         <% }else {%>
             let client = { on: function () { } };
         <%} %>
@@ -63,8 +63,8 @@
         })
     </script>
     <script type="text/javascript">
-        <% if (locals['broker']) {%>
-                let clientpixel = mqtt.connect("ws://<%= locals['broker'].address%>:<%= locals['broker'].txtRecord.wsport%>", { clientId: 'pixelsimulator_' + Math.random().toString(16).substr(2, 8) });
+        <% if (locals['imbroker']) {%>
+                let clientpixel = mqtt.connect("ws://<%= locals['imbroker'].address%>:<%= locals['imbroker'].txtRecord.wsport%>", { clientId: 'pixelsimulator_' + Math.random().toString(16).substr(2, 8) });
         <% }else {%>
             let clientpixel = { on: function () { } };
         <%} %>
@@ -202,7 +202,7 @@
 </head>
 
 <body>
-    <div id="mqtton">MQTT Brocker</div>
+    <div id="mqtton">MQTT Brocker ws://<%= locals['imbroker'].address %>:<%= locals['imbroker'].txtRecord.wsport %></div>
     <hr/> helmet
     <input id="7" name="helmet" type="range" min="170" max="325" />
     <hr/> eyes RGB
