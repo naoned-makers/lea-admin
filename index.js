@@ -87,12 +87,12 @@ app.get('/init3', function (req, res, next) {
 server.listen(ADMIN_HTTP_PORT);
 console.log('\x1b[35m%s\x1b[0m', "admin web server is up on http://" + ip.address() + ":" + ADMIN_HTTP_PORT);
 bonjour.publish({
-  name: 'imadmin',
+  name: 'leaadmin',
   type: 'http',
-  subtypes: ["im", "admin"],
+  subtypes: ["lea", "admin"],
   port: ADMIN_HTTP_PORT,
   txt: {
-    subtypes: ["im", "admin"]
+    subtypes: ["lea", "admin"]
   }
 });
 
@@ -106,15 +106,15 @@ browser.on("down", (service) => {
 //discoverService('googlecast');
 
 function getServices() {
-  let imServices = {};
+  let leaServices = {};
   browser.services
-    .filter((service) => service.name.indexOf('im') == 0)
+    .filter((service) => service.name.indexOf('lea') == 0)
     .map((service) => {
       let ipV4address = (service.addresses[1] && service.addresses[1].length < service.addresses[0].length) ? service.addresses[1] : service.addresses[0];
       if (!ipV4address) {
         ipV4address = service.referer.address;
       }
-      imServices[service.name] = {
+      leaServices[service.name] = {
         address: ipV4address,
         host: service.host,
         port: service.port,
@@ -122,7 +122,7 @@ function getServices() {
         txtRecord: service.txt
       };
     });
-  return imServices;
+  return leaServices;
 }
 
 
@@ -131,12 +131,12 @@ function getServices() {
 //##############################################################################
 console.log("pm2-gui starting");
 bonjour.publish({
-  name: 'impm2gui',
+  name: 'leapm2gui',
   type: 'http',
-  subtypes: ["im", "pm2gui"],
+  subtypes: ["lea", "pm2gui"],
   port: 8088,
   txt: {
-    subtypes: ["im", "pm2gui"]
+    subtypes: ["lea", "pm2gui"]
   }
 });
 pm2GUI.startWebServer('./pm2-gui.ini');//port 8088

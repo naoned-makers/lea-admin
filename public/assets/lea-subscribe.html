@@ -1,13 +1,13 @@
 <link rel="import" href="https://polygit.org/components/polymer/polymer-element.html">
 
-<dom-module id="im-subscribe">
+<dom-module id="lea-subscribe">
 
   <template></template>
 
   <script>
-    // Define the class for a new element called im-command
-    class ImSubscribe extends Polymer.Element {
-      static get is() { return "im-subscribe"; }
+    // Define the class for a new element called lea-suscribe
+    class LeaSubscribe extends Polymer.Element {
+      static get is() { return "lea-subscribe"; }
       constructor() {
         super();
         this._connectListener = this._handleConnect.bind(this);
@@ -62,7 +62,7 @@
         }
       }
     }
-    customElements.define(ImSubscribe.is, ImSubscribe);
+    customElements.define(LeaSubscribe.is, LeaSubscribe);
   </script>
 </dom-module>
 

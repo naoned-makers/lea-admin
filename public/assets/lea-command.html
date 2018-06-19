@@ -1,16 +1,16 @@
 <link rel="import" href="https://polygit.org/components/polymer/polymer-element.html">
 <link rel="import" href="https://polygit.org/components/paper-button/paper-button.html">
 
-<dom-module id="im-command">
+<dom-module id="lea-command">
 
   <template>
     <paper-button raised id="myButton">[[label]]</paper-button>
   </template>
 
   <script>
-    // Define the class for a new element called im-command
-    class ImCommand extends Polymer.Element {
-      static get is() { return "im-command"; }
+    // Define the class for a new element called lea-command
+    class LeaCommand extends Polymer.Element {
+      static get is() { return "lea-command"; }
       constructor() {
         super();
         //this.textContent = "I'm a custom-element.";
@@ -39,15 +39,15 @@
       }
 
       _handleClick() {
-        let strPayLoad = "{\"origin\":\"im-admin\"" + this.payload + " }";
+        let strPayLoad = "{\"origin\":\"lea-admin\"" + this.payload + " }";
         console.log(this.topic,strPayLoad);
-        client.publish("im/command/"+this.topic,strPayLoad);
+        client.publish("lea/command/"+this.topic,strPayLoad);
         return true;
       }
     }
     //topic="head/move" payload=""
     // Register the new element with the browser
-    customElements.define(ImCommand.is, ImCommand);
+    customElements.define(LeaCommand.is, LeaCommand);
   </script>
 </dom-module>
 

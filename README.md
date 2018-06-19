@@ -1,5 +1,5 @@
-# im-admin
-im launcher and supervisor with admin and simulation ihm
+# lea-admin
+lea launcher and supervisor with admin and simulation ihm
 
 
 **Install**

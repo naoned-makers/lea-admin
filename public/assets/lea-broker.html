@@ -1,6 +1,6 @@
 <link rel="import" href="https://polygit.org/components/polymer/polymer-element.html">
 <link rel="import" href="https://polygit.org/components/iron-icons/iron-icons.html">
-<dom-module id="im-broker">
+<dom-module id="lea-broker">
 
     <template>
         <style is="custom-style">
@@ -16,9 +16,9 @@
     </template>
 
     <script>
-        // Define the class for a new element called im-command
-        class ImBroker extends Polymer.Element {
-            static get is() { return "im-broker"; }
+        // Define the class for a new element called lea-command
+        class LeaBroker extends Polymer.Element {
+            static get is() { return "lea-broker"; }
             constructor() {
                 super();
             }
@@ -49,7 +49,7 @@
                 /**
                     PARTIE MQTT sur WEBSOCKET
                 */
-                var client = mqtt.connect(this.url, { clientId: 'webadmin_' + Math.random().toString(16).substr(2, 8) });
+                var client = mqtt.connect(this.url, { clientId: 'leawebadmin_' + Math.random().toString(16).substr(2, 8) });
                 window.client = client;
                 var curBroker = this;
                 //Emitted on successful (re)connection 
@@ -84,6 +84,6 @@
                 })
             }
         }
-        customElements.define(ImBroker.is, ImBroker);
+        customElements.define(LeaBroker.is, LeaBroker);
     </script>
 </dom-module>

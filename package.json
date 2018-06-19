@@ -1,7 +1,7 @@
 {
-  "name": "im-admin",
+  "name": "lea-admin",
   "version": "1.0.0",
-  "description": "im-admin",
+  "description": "lea-admin",
   "main": "index.js",
   "scripts": {
     "prod": "pm2 start ecosystem.config.js --env production",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/naoned-makers/im-admin.git"
+    "url": "git+https://github.com/naoned-makers/lea-admin.git"
   },
   "author": "dbatiot",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/naoned-makers/im-admin/issues"
+    "url": "https://github.com/naoned-makers/lea-admin/issues"
   },
-  "homepage": "https://github.com/naoned-makers/im-admin#readme",
+  "homepage": "https://github.com/naoned-makers/lea-admin#readme",
   "dependencies": {
     "bonjour": "git+https://github.com/ionic-team/bonjour.git",
     "ejs": "^2.5.7",
